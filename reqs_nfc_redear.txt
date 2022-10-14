@@ -1,0 +1,15 @@
+BTrees==4.10.1
+cffi==1.15.1
+keyboard==0.13.5
+nfc-uid==0.3.6
+persistent==4.9.1
+pycparser==2.21
+pyscard==2.0.5
+six==1.16.0
+smartcard==0.3
+transaction==3.0.1
+zc.lockfile==2.0
+ZConfig==3.6.0
+ZODB==5.7.0
+zodbpickle==2.4
+zope.interface==5.5.0
