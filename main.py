@@ -13,9 +13,9 @@ import keyboard as Keyboard
 import time
 import sys
 
-# class Enviroment():
-# 	__last_chip__ = ""
-# 	__loop__ = True
+class Enviroment():
+	__last_chip__ = ""
+	__loop__ = True
 
 def nfc_reader(self, debug=True ,output=True, keyboard_output=False, set_timeout=120, set_cooldown = 3):
 	"""
@@ -31,8 +31,8 @@ def nfc_reader(self, debug=True ,output=True, keyboard_output=False, set_timeout
 	while card_not_found:
 		try:
 			if output:
-				#print("Waiting for Card..")
-				self.ti_result.text = "Waiting for Card.."
+				print("Waiting for Card..")
+				#self.ti_result.text = "Waiting for Card.."
 			getuid=[0xFF, 0xCA, 0x00, 0x00, 0x00]
 			act = AnyCardType()
 			cr = CardRequest( timeout=set_timeout, cardType=act )
@@ -47,13 +47,13 @@ def nfc_reader(self, debug=True ,output=True, keyboard_output=False, set_timeout
 				if output:
 					print(f"Success in reading chip..\nUID: {data}")
 					self.ti_result.text = data
-				if keyboard_output:
-					if debug:
-						#print("Output send to keyboard")
-						self.ti_result.text = "Output send to keyboard"
-					Keyboard.write(f"{data}")
-				else:
-					return data
+				# if keyboard_output:
+				# 	if debug:
+				# 		#print("Output send to keyboard")
+				# 		self.ti_result.text = "Output send to keyboard"
+				# 	Keyboard.write(f"{data}")
+				# else:
+				# 	return data
 				time.sleep(set_cooldown)
 			cs=None
 		except CardRequestTimeoutException:
@@ -72,19 +72,19 @@ class pageLayout(BoxLayout):
 		self.add_widget(self.ti_result)
 		nfc_reader(self, debug=True ,output=True, keyboard_output=False, set_timeout=120, set_cooldown = 3)
 
-# def loop(debug=True ,output=True, keyboard_output=False, set_timeout=120, set_cooldown = 3):
-#     """
-#     Returns UID of NFC Chip/Card\n
-#     Set ouput to False if no output is required default is True \n
-#     Will be looped until Enviroment.__loop__ is False \n
-#     debug -> def = True          | Output for errors etc. will be enabled \n
-#     output -> def = True         | Output for success/feedback etc. will be enabled \n
-#     keyboard_output -> def False | Types output like typing it \n
-#     set_timeout -> def 120/2min  | Sets timeout in seconds. Timeout for scan card. \n
-#     """
+def loop(debug=True ,output=True, keyboard_output=False, set_timeout=120, set_cooldown = 3):
+    """
+    Returns UID of NFC Chip/Card\n
+    Set ouput to False if no output is required default is True \n
+    Will be looped until Enviroment.__loop__ is False \n
+    debug -> def = True          | Output for errors etc. will be enabled \n
+    output -> def = True         | Output for success/feedback etc. will be enabled \n
+    keyboard_output -> def False | Types output like typing it \n
+    set_timeout -> def 120/2min  | Sets timeout in seconds. Timeout for scan card. \n
+    """
     
-#     while Enviroment.__loop__:
-#         nfc_reader(debug=debug ,output=output, keyboard_output=keyboard_output, set_timeout=set_timeout, set_cooldown = set_cooldown)
+    while Enviroment.__loop__:
+        nfc_reader(debug=debug ,output=output, keyboard_output=keyboard_output, set_timeout=set_timeout, set_cooldown = set_cooldown)
 
 class MainApp(App):
 	def build(self):
